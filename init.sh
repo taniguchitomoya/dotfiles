@@ -1,11 +1,9 @@
 #初期設定コマンド
 #WSL2のubuntu（インストール直後の状態）にて使う
-#2026/5/14 作成
-
+#2026/5/14 新規作成
 
 sudo apt update
 sudo apt upgrade
-
 
 #miseのインストール
 curl https://mise.run | sh
