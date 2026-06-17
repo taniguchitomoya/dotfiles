@@ -40,3 +40,29 @@ code .
 
 #miseの設定はコマンドじゃなくてrepoに置くべき？
 
+is_wsl() {
+    grep -qEi "(Microsoft|WSL)" /proc/version &> /dev/null
+}
+
+if is_wsl; then
+    echo "WSL環境を検出しました。wsl.confのセットアップを開始します..."
+
+    SRC_CONF="./config/wsl.conf"
+    DEST_CONF="/etc/wsl.conf"
+
+    # 既にファイルが存在する場合はバックアップを取る（安全対策）
+    if [ -f "$DEST_CONF" ]; then
+        echo "既存の wsl.conf をバックアップします -> ${DEST_CONF}.bak"
+        sudo cp "$DEST_CONF" "${DEST_CONF}.bak"
+    fi
+
+    # ファイルをコピーして権限を適切に設定
+    sudo cp "$SRC_CONF" "$DEST_CONF"
+    sudo chown root:root "$DEST_CONF"
+    sudo chmod 644 "$DEST_CONF"
+
+    echo "✅ wsl.conf の配置が完了しました。"
+    echo "⚠️ 変更を適用するには、WindowsのPowerShellで 'wsl --shutdown' を実行してWSLを再起動してください。"
+else
+    echo "WSL環境ではないため、wsl.conf のセットアップをスキップします。"
+fi
