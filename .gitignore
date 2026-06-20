@@ -1,0 +1,24 @@
+# OS temporary files
+.DS_Store
+Thumbs.db
+
+# Backups
+*.bak
+*~
+
+# Local development and tests
+test/
+/test
+
+# IDE settings
+.vscode/
+.idea/
+
+# Node/Python local files
+node_modules/
+__pycache__/
+*.pyc
+.venv/
+venv/
+.mise.local.toml
+.mise.toml
